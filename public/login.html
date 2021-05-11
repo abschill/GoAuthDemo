@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Authenticate</title>
+</head>
+<body>
+    <form onsubmit="formCallback(event)">
+        <input type="text" name="first"placeholder="Enter Username"/>
+        <input name="last" type="text" placeholder="Enter Password"/>
+        <button type="submit">Login</button>
+    </form>
+    <script>
+        async function formCallback(event){
+            event.preventDefault();
+            const {first, last} = event.target;
+            
+            //console.log(event.target.password);
+            const res = await fetch('/login', {
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify({"first":first.value, "last":last.value})
+            });
+            const data = await res.json();
+            console.log(data);
+                }
+                
+    </script>
+</body>
+</html>
